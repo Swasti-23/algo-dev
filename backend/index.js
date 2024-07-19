@@ -1,7 +1,16 @@
 const express = require('express');
 const app = express();
 const {DBConnection} = require('./database/db.js');
-const User = require('./models/users.js');
+const User = require('./models/Users.js');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const dotenv = require('dotenv');
+dotenv.config();
+
+//middleware
+app.use(express.json());
+app.use(express.urlencoded({extended:true}));
+
 
 DBConnection();
 
@@ -27,10 +36,45 @@ app.post("/register", async (req, res) => {
         }
 
         //encrypt the password
+        const hashPassword = bcrypt.hashSync(password, 10);
+        console.log(hashPassword);
+
         //save the user to the database
+        const user = await User.create({
+            firstname,
+            lastname,
+            email,
+            password : hashPassword,
+        });
+
         //generate a token for user and send it
+        const token = jwt.sign({id:user._id, email}, process.env.SECRET_KEY, {
+            expiresIn: "1h"
+        });
+        user.token = token;
+        user.password = undefined;
+        res.status(201).json({
+            temp: "You have succesfully registered!",
+            success : true,
+            token,
+            user
+        });
     }catch(error){
         console.log("Error while registering", error);
+    }
+});
+
+app.post("/login", (req, res) => {
+    try{
+        //get all the data from request body
+        //check all the details should exist
+        //find the user in the database
+        //match the password
+        //create token
+        //store cookies
+        //send the token
+    }catch(error){
+
     }
 });
 
