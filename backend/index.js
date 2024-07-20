@@ -19,7 +19,6 @@ app.get("/", (req, res) => {
 });
 
 app.post("/register", async (req, res) => {
-    console.log(req);
     try{
         //get all the data from request body
         const {firstname, lastname, email, password} = req.body;
@@ -64,12 +63,28 @@ app.post("/register", async (req, res) => {
     }
 });
 
-app.post("/login", (req, res) => {
+app.post("/login", async (req, res) => {
     try{
         //get all the data from request body
+        const {email, password} = req.body;
+
         //check all the details should exist
+        if(!(email && password)){
+            return res.status(400).send("Please enter all the required fields!");
+        }
+
         //find the user in the database
+        const existingUser = await User.findOne({email});
+        if(!existingUser){
+            return res.status(400).send("The email is not registered");
+        }
+
         //match the password
+        const passwordMatch = bcrypt.compareSync(password, existingUser.password);
+        if(!passwordMatch){
+            return res.status(400).send("Email & password don't match");
+        }
+        
         //create token
         //store cookies
         //send the token
