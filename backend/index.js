@@ -5,6 +5,10 @@ const User = require('./models/Users.js');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const dotenv = require('dotenv');
+//cookie parser
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
+
 dotenv.config();
 
 //middleware
@@ -86,10 +90,30 @@ app.post("/login", async (req, res) => {
         }
         
         //create token
-        //store cookies
-        //send the token
-    }catch(error){
+        const token = jwt.sign({id:user._id, email}, process.env.SECRET_KEY, {
+            expiresIn: "1h"
+        });
+        user.token = token;
+        
 
+        //store cookies
+        res.cookie("token", token, {
+            httpOnly: true, // Makes the cookie inaccessible to JavaScript
+            secure: true, // Ensures the cookie is sent only over HTTPS
+            maxAge: 3600000 // 1 hour in milliseconds
+        });
+        
+        //send the token
+        user.password = undefined;
+        res.status(201).json({
+            temp: "You have succesfully logged-in!",
+            success : true,
+            token,
+            user
+        });
+
+    }catch(error){
+        console.log("Error while registering", error);
     }
 });
 
