@@ -28,10 +28,10 @@ router.get("/", (req, res) => {
 router.post("/register", async (req, res) => {
     try{
         //get all the data from request body
-        const {firstname, lastname, email, password} = req.body;
+        const {fullname, email, password} = req.body;
 
         //check all data should exist
-        if(!(firstname && lastname && email && password)){
+        if(!(fullname && email && password)){
             return res.status(400).send("Please enter all the required fields!");
         }
 
@@ -47,8 +47,7 @@ router.post("/register", async (req, res) => {
 
         //save the user to the database
         const user = await User.create({
-            firstname,
-            lastname,
+            fullname,
             email,
             password : hashPassword,
         });
