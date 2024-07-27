@@ -7,3 +7,13 @@
 .bluetext{
     color: #1d4ed8;
 }
+.button {
+    background-color: #1d4ed8;
+}
+
+.button:hover{
+    background-color: #315eda;
+}
+.button:disabled{
+    background-color: #6e8de3;
+}
