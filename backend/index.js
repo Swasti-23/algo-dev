@@ -3,7 +3,9 @@ const app = express();
 const {DBConnection} = require('./database/db.js');
 const dotenv = require('dotenv');
 const authRoutes = require('./routes/auth.js')
+const cors = require('cors');
 
+app.use(cors());
 dotenv.config();
 
 app.use(express.json());
