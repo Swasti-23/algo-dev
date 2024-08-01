@@ -1,0 +1,18 @@
+
+.container {
+  display: flex;
+  min-height: 100vh;   
+  align-items: center;
+  flex-direction: column;
+  background-color: #789fee
+  
+}
+.card{
+    width: 90%;
+    height: 80%;
+    margin: 0.5%;
+}
+
+.card:hover{
+    cursor: pointer;
+}

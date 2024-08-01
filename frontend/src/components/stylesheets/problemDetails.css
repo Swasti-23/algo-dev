@@ -1,0 +1,37 @@
+.problem-details-container {
+    display: flex;
+    flex-direction: column;
+    margin: 4%;
+
+  }
+  
+  .title {
+    font-size: 170%;
+    margin-bottom: 3%;
+    font-weight: bold; /* Make the text bold */
+    text-align: center; /* Center the text */
+  }
+
+.headingtext{
+    font-size: 120%;
+    font-weight: bold;
+    margin-top: 2%;
+}
+
+.text{
+    font-size: 110%;
+}
+
+.outerbox{
+    border: 1px solid #000;
+    border-bottom: 0px;
+    padding: 0.5%;
+    
+}
+
+.box {
+    border: 1px solid #000; /* Adjust the color to your preference */
+    padding: 10px; /* Optional: adds some padding inside the border */
+    margin-bottom: 10px; /* Optional: adds space between boxes */
+}
+

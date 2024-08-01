@@ -5,7 +5,7 @@ import Login from "./components/common/login";
 import Register from "./components/common/register";
 import Dashboard from "./components/user/dashboard";
 import Problems from "./components/user/problems";
-import ProblemDetail from "./components/user/problemDetails";
+import ProblemDetails from "./components/user/problemDetails";
 import AuthState from "./context/auth/authState";
 
 function App() {
@@ -18,7 +18,7 @@ function App() {
           <Route path="/register" element={<Register />}></Route>
           <Route path="/" element={<Dashboard />}></Route>
           <Route path="/problems" element={<Problems />}></Route>
-          <Route path="/problems/:id" element={<ProblemDetail />}></Route>
+          <Route path="/problems/:id" element={<ProblemDetails />}></Route>
         </Routes>
         <Footer />
       </Router>
