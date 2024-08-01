@@ -1,13 +1,15 @@
 import '../stylesheets/login.css'
 import { useState } from "react";
 import axios from 'axios';
-
-
+import {useNavigate} from "react-router-dom"
+import { useContext } from 'react';
+import AuthContext from '../../context/auth/authContext';
 
 const Login = ()=> {
-
+    const navigate = useNavigate()
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {user, setUser} = useContext(AuthContext);
 
     const handleEmail = (e) => {
         setEmail(e.target.value);
@@ -25,6 +27,11 @@ const Login = ()=> {
               email,
               password,
           });
+          if(!response){
+            throw new Error("Login with correct credentials!");
+          }
+          setUser({username: response.data.user.fullname});
+          navigate('/');
           console.log(response.data);
         } catch (error) {
           throw new Error(error);
