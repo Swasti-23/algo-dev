@@ -2,12 +2,12 @@ import { useLocation } from "react-router-dom";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import "../stylesheets/problemDetails.css";
+import { useNavigate } from "react-router-dom";
 
 const problemDetails = () => {
   const location = useLocation();
   const [problem, setProblem] = useState(location.state || null);
-  
-
+  const navigate = useNavigate();
   const { state } = location;
   const problemId = state?._id || "";
 
@@ -28,9 +28,11 @@ const problemDetails = () => {
     }
   }, [problem, problemId]);
 
- 
-
   if (!problem) return <div>Loading...</div>;
+
+  const handleSubmit = ()=> {
+    navigate(`/problems/${problem._id}/run`, {state : problem});
+  }
 
   return (
     <div className="problem-details-container">
@@ -85,6 +87,9 @@ const problemDetails = () => {
           )}
         </div>
       ))}
+      <div>
+        <button type="submit" onClick={handleSubmit}>Submit</button>
+      </div>
     </div>
   );
 };

@@ -1,14 +1,15 @@
 import { useContext } from "react";
-import authContext from "../../context/auth/authContext"
-
+import authContext from "../../context/auth/authContext";
+import '../stylesheets/dashboard.css';
 
 const Dashboard = () => {
   const { user } = useContext(authContext);
-  return (
+  const isLoggedIn = user.username !== "none";
 
-    <>
-    <h1>Hey, {user.username}</h1>
-    </>
+  return (
+    <div className="container">
+      <h1>{isLoggedIn ? `Hey, ${user.username}` : "Please Log In"}</h1>
+    </div>
   );
 };
 
