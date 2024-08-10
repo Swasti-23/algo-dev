@@ -45,7 +45,7 @@ select {
     border: 1px solid #ced4da;
     border-radius: 1%;
     font-family: monospace;
-    font-size: 1%;
+    font-size: 100%; /* Adjusted font size */
     background-color: #f8f9fa;
     color: #343a40;
 }
