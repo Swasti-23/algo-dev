@@ -8,7 +8,7 @@ const Dashboard = () => {
 
   return (
     <div className="container">
-      <h1>{isLoggedIn ? `Hey, ${user.username}` : "Please Log In"}</h1>
+      <h1 className="heading">{isLoggedIn ? `Hey, ${user.username}` : "WE ARE CODECLASH"}</h1>
     </div>
   );
 };

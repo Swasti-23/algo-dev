@@ -1,0 +1,6 @@
+.heading {
+    padding: 20%;
+    font-weight: bold; /* Makes the font thicker */
+    font-size: 300%;   /* Adjust the font size as needed */
+    color: #0056b3;
+}

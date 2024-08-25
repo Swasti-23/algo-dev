@@ -9,20 +9,42 @@ import ProblemDetails from "./components/user/problemDetails";
 import AuthState from "./context/auth/authState";
 import Compiler from "./components/user/compiler";
 import ScrollUp from "./services/scrollUp";
+import ProtectedRoute from "./services/protectedRoute.jsx";
 
 function App() {
   return (
     <AuthState>
       <Router>
-      <ScrollUp/>
+        <ScrollUp />
         <Navbar />
         <Routes>
           <Route path="/login" element={<Login />}></Route>
           <Route path="/register" element={<Register />}></Route>
           <Route path="/" element={<Dashboard />}></Route>
-          <Route path="/problems" element={<Problems />}></Route>
-          <Route path="/problems/:id" element={<ProblemDetails />}></Route>
-          <Route path="/problems/:id/run" element={<Compiler />}></Route>
+          <Route
+            path="/problems"
+            element={
+              <ProtectedRoute>
+                <Problems />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/problems/:id"
+            element={
+              <ProtectedRoute>
+                <ProblemDetails />
+              </ProtectedRoute>
+            }
+          />
+          <Route
+            path="/problems/:id/run"
+            element={
+              <ProtectedRoute>
+                <Compiler />
+              </ProtectedRoute>
+            }
+          />
         </Routes>
         <Footer />
       </Router>

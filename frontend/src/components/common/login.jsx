@@ -31,6 +31,7 @@ const Login = ()=> {
             throw new Error("Login with correct credentials!");
           }
           setUser({username: response.data.user.fullname});
+          localStorage.setItem('username', response.data.user.fullname);
           navigate('/');
           console.log(response.data);
         } catch (error) {
