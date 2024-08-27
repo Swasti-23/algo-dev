@@ -2,10 +2,14 @@ const fs = require('fs');
 const path = require('path');
 const { exec } = require('child_process');
 
-const outputPath = path.join(__dirname, 'outputs');
+const outputPath = path.join(__dirname, 'outputCpp');
 
-if(!fs.existsSync(outputPath)){
-    fs.mkdirSync(outputPath, {recursive : true});
+if (!fs.existsSync(outputPath)) {
+    try {
+        fs.mkdirSync(outputPath, { recursive: true });
+    } catch (err) {
+        console.error('Error creating directory:', err);
+    }
 }
 
 const executeCpp = async (filepath, inputPath) => {
@@ -20,11 +24,13 @@ const executeCpp = async (filepath, inputPath) => {
         exec(command, (error, stdout, stderr) => {
             if (error) {
                 console.error('Compilation error:', error.message);
-                return reject({ error: error.message, stderr });
+                reject({ error: error.message, stderr });
+                return;
             }
             if (stderr) {
                 console.error('Compilation stderr:', stderr);
-                return reject({ stderr });
+                reject({ stderr });
+                return;
             }
             resolve(stdout);
         });

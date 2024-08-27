@@ -1,5 +1,10 @@
+.container{
+    display: flex;               /* Use flexbox for centering */
+    justify-content: center;     /* Center horizontally */
+    align-items: center; 
+
+}
 .heading {
-    padding: 20%;
     font-weight: bold; /* Makes the font thicker */
     font-size: 300%;   /* Adjust the font size as needed */
     color: #0056b3;

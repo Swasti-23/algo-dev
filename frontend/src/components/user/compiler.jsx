@@ -48,7 +48,7 @@ const Compiler = () => {
       setVerdict("Running");
       let Verdict = true;
       for(let testcase of problem.testcases) {
-        const formattedInput = testcase.inputs.map(({ input }) => formatInput(input)).join(" ");
+        const formattedInput = testcase.inputs.map(({ input }) => formatInput(input)).join("\n");
         console.log(formattedInput);
         try {
           const response = await axios.post(COMPILE_PATH, { language: language, code: code, input: formattedInput });
