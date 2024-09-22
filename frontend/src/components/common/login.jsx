@@ -35,6 +35,7 @@ const Login = ()=> {
           navigate('/');
           console.log(response.data);
         } catch (error) {
+            console.log("i am a bitch");
           throw new Error(error);
         }
       }

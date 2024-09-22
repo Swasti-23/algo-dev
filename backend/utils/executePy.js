@@ -14,7 +14,7 @@ if (!fs.existsSync(outputPath)) {
 
 const executePy = async (filepath, inputPath) => {
     return new Promise((resolve, reject) => {
-        const command = `python "${filepath}" < "${inputPath}"`;
+        const command = `python3 "${filepath}" < "${inputPath}"`;
 
         exec(command, (error, stdout, stderr) => {
             if (error) {
